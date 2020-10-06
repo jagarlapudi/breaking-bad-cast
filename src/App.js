@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Header from "./components/ui/Header";
+import CardGrid from "./components/character/CardGrid";
+import Search from "./components/ui/Search";
+import "./app.css";
+const App = () => {
+  const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [query, setQuery] = useState("");
+  useEffect(() => {
+    const fetchApiData = async () => {
+      const items = await axios.get(
+        `https://www.breakingbadapi.com/api/characters?name=${query}`
+      );
+      //console.log(items);
+      setItems(items.data);
+      setIsLoading(false);
+    };
+    fetchApiData();
+  }, [query]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header />
+      <Search getQuery={(q) => setQuery(q)} />
+      <CardGrid items={items} isLoading={isLoading} />
     </div>
   );
-}
+};
 
 export default App;
