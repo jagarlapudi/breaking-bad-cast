@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-
+import debounce from "lodash/debounce";
 const Search = ({ getQuery }) => {
   const [queryText, setQueryText] = useState("");
 
-  const ChangeHandler = (e) => {
-    setQueryText(e.target.value);
-    getQuery(e.target.value);
-  };
+  const ChangeHandler = debounce((text) => {
+    setQueryText(text);
+    getQuery(text);
+  }, 2000);
   return (
     <section>
       <form className="search-form">
@@ -15,7 +15,7 @@ const Search = ({ getQuery }) => {
           className="form-control"
           placeholder="Search Characters..."
           autoFocus
-          onChange={ChangeHandler}
+          onChange={(e) => ChangeHandler(e.target.value)}
         />
       </form>
     </section>
