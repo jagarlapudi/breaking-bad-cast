@@ -140,3 +140,10 @@ p {
   position: relative;
   letter-spacing: 1.5px;
 }
+
+.norecs {
+  color: red;
+  background-color: cornsilk;
+  width: 400px;
+  margin: 0 auto;
+}
