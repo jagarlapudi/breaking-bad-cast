@@ -13,11 +13,27 @@ const App = () => {
       const items = await axios.get(
         `https://www.breakingbadapi.com/api/characters?name=${query}`
       );
-      //console.log(items);
+      //set data to localstorage
+      localStorage.setItem("breaking-bad-characters", JSON.stringify(items));
       setItems(items.data);
       setIsLoading(false);
     };
-    fetchApiData();
+    //localstorage not available, then call API
+    if (!localStorage.getItem("breaking-bad-characters")) {
+      console.log("Loading Fresh Copy of Data from API");
+      fetchApiData();
+    } else {
+      //console.log("Data Loading from LocalStorage");
+      const getLocalStorageData = JSON.parse(
+        localStorage.getItem("breaking-bad-characters")
+      );
+      const filteredData = getLocalStorageData.data.filter(
+        (character) =>
+          character.name.toLowerCase().search(query.toLowerCase()) !== -1
+      );
+      setItems(filteredData);
+      setIsLoading(false);
+    }
   }, [query]);
   return (
     <div className="container">

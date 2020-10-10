@@ -3,11 +3,14 @@ import debounce from "lodash/debounce";
 const Search = ({ getQuery }) => {
   const [queryText, setQueryText] = useState("");
 
-  const ChangeHandler = debounce((text) => {
+  /* const ChangeHandler = debounce((text) => {
     getQuery(text);
     setQueryText(text);
-  }, 2000);
-
+  }, 2000); */
+  const ChangeHandler = (text) => {
+    getQuery(text);
+    setQueryText(text);
+  };
   const inputRef = useRef(null);
   useEffect(() => {
     inputRef.current.focus();

@@ -142,8 +142,8 @@ p {
 }
 
 .norecs {
-  color: red;
+  color: orangered;
   background-color: cornsilk;
-  width: 400px;
+  width: 300px;
   margin: 0 auto;
 }
