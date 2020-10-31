@@ -3,7 +3,7 @@ import axios from "axios";
 import Header from "./components/ui/Header";
 import CardGrid from "./components/character/CardGrid";
 import Search from "./components/ui/Search";
-import "./app.css";
+import "./App.css";
 const App = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
